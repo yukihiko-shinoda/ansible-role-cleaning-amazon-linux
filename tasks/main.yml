@@ -1,0 +1,14 @@
+---
+- name: remove aws credentials
+  file:
+    state: absent
+    path: ~/.aws/credentials
+
+- name: yum clean
+  command: yum clean all
+
+- name: clear logs
+  shell: find /var/log -type f | while read f; do echo -ne '' > $f; done
+
+- name: clear bash history
+  shell: find / -name .bash_history | while read f; do echo -ne '' > $f; done
