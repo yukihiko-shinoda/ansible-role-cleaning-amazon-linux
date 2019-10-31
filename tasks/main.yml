@@ -6,6 +6,11 @@
 
 - name: yum clean
   command: yum clean all
+  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu'
+
+- name: apt clean
+  command: apt clean
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: clear logs
   shell: find /var/log -type f | while read f; do echo -ne '' > $f; done
